@@ -22,8 +22,12 @@ S_BOX = [
 ]
 
 # Example of 128-bit plaintext and key (both should be 16 bytes for AES-128)
-plaintext = [0x32, 0x43, 0xF6, 0xA8, 0x88, 0x5A, 0x30, 0x8D, 0x31, 0x31, 0x98, 0xA2, 0xE0, 0x37, 0x07, 0x34]
-key = [0x2B, 0x7E, 0x15, 0x16, 0x28, 0xAE, 0xD2, 0xA6, 0xAB, 0xF7, 0x4D, 0x3E, 0x4D, 0x4E, 0x7C, 0xE5]
+def text_to_hex(text):
+    # Convert hex string to bytes
+    return [int(text[i:i+2], 16) for i in range(0, len(text), 2)]
+
+plaintext = text_to_hex("2C43F6A8885A308D313198A2E0370734")
+key = text_to_hex("2B7E151628AED2A6ABF74D3E4D4E7CE5")
 
 # AES operates on a 4x4 matrix (state)
 def matrixify(data):
@@ -33,7 +37,10 @@ def matrixify(data):
 def sub_bytes(state):
     for i in range(4):
         for j in range(4):
-            state[i][j] = S_BOX[state[i][j]]
+            # Split the byte value into row and column indices
+            row = (state[i][j] >> 4) & 0x0F  # High 4 bits
+            col = state[i][j] & 0x0F         # Low 4 bits
+            state[i][j] = S_BOX[row][col]
     return state
 
 # ShiftRows step
