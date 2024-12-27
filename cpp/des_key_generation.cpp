@@ -62,7 +62,7 @@ void generate_keys(string key){
 	string left= perm_key.substr(0, 28); 
 	string right= perm_key.substr(28, 28); 
 	// Generating 16 keys
-	for(int i=0; i<16; i++){ 
+	for(int i=0; i<2; i++){ 
 		// 3.1. For rounds 1, 2, 9, 16 the key_chunks
 		// are shifted by one.
 		if(i == 0 || i == 1 || i==8 || i==15 ){
