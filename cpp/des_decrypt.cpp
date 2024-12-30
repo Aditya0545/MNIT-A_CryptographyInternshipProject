@@ -304,7 +304,7 @@ int main()
 	pt = ct;
 	string decrypted = DES();
 	cout << "Decrypted text:" << decrypted << endl;
-	// Comapring the initial plain text with the decrypted text
+	// Comparing the initial plain text with the decrypted text
 	if (decrypted == apt)
 	{
 		cout << "Plain text encrypted and decrypted successfully." << endl;
