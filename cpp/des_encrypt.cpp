@@ -4,7 +4,8 @@
 #include <cmath>
 using namespace std;
 // Array to hold 16 keys
-string round_keys[16];
+const int NUM_OF_ROUNDS = 16;
+string round_keys[NUM_OF_ROUNDS];
 // String to hold the plain text
 string pt;
 // Function to convert a number in decimal to binary
@@ -115,7 +116,7 @@ void generate_keys(string key)
 	// 2. Dividing the key into two equal halves
 	string left = perm_key.substr(0, 28);
 	string right = perm_key.substr(28, 28);
-	for (int i = 0; i < 16; i++)
+	for (int i = 0; i < NUM_OF_ROUNDS; i++)
 	{
 		// 3.1. For rounds 1, 2, 9, 16 the key_chunks
 		// are shifted by one.
@@ -224,7 +225,7 @@ string DES()
 	string left = perm.substr(0, 32);
 	string right = perm.substr(32, 32);
 	// The plain text is encrypted 16 times
-	for (int i = 0; i < 16; i++)
+	for (int i = 0; i < NUM_OF_ROUNDS; i++)
 	{
 		string right_expanded = "";
 		// 3.1. The right half of the plain text is expanded
@@ -259,7 +260,7 @@ string DES()
 		xored = Xor(perm2, left);
 		// 3.7. The left and the right parts of the plain text are swapped
 		left = xored;
-		if (i < 15)
+		if (i < NUM_OF_ROUNDS - 1)
 		{
 			string temp = right;
 			right = xored;

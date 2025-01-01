@@ -3,8 +3,11 @@
 #include <string>
 using namespace std;
 
+// Add at the top with other constants
+const int NUM_OF_ROUNDS = 16;
+
 // Array to hold the 16 keys
-string round_keys[16];
+string round_keys[NUM_OF_ROUNDS];
 
 // Function to do a circular left shift by 1
 string circular_left_shift_1(string key_chunk)
@@ -67,7 +70,7 @@ void generate_keys(string key)
 	string left = perm_key.substr(0, 28);
 	string right = perm_key.substr(28, 28);
 	// Generating 16 keys
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < NUM_OF_ROUNDS; i++)
 	{
 		// 3.1. For rounds 1, 2, 9, 16 the key_chunks
 		// are shifted by one.
