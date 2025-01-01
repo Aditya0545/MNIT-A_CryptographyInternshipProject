@@ -277,19 +277,60 @@ string DES()
 	// And we finally get the cipher text
 	return ciphertext;
 }
+// Function to convert string to binary
+string stringToBinary(string text)
+{
+	string binary = "";
+	for (char &c : text)
+	{
+		// Convert each character to 8-bit binary
+		for (int i = 7; i >= 0; i--)
+		{
+			binary += ((c >> i) & 1) ? '1' : '0';
+		}
+	}
+	return binary;
+}
+// Function to convert binary to string
+string binaryToString(string binary)
+{
+	string text = "";
+	for (int i = 0; i < binary.length(); i += 8)
+	{
+		string byte = binary.substr(i, 8);
+		char c = static_cast<char>(convertBinaryToDecimal(byte));
+		text += c;
+	}
+	return text;
+}
 int main()
 {
 	// A 64 bit key
 	string key = "1010101010111011000010010001100000100111001101101100110011011101";
-	// A block of plain text of 64 bits
-	pt = "1010101111001101111001101010101111001101000100110010010100110110";
+
+	// Get plaintext input
+	string text;
+	cout << "Enter text to encrypt (8 characters): ";
+	getline(cin, text);
+
+	// Pad the text to 8 characters if needed
+	while (text.length() < 8)
+	{
+		text += ' ';
+	}
+	// Take only first 8 characters if longer
+	text = text.substr(0, 8);
+
+	// Convert text to binary
+	pt = stringToBinary(text);
 	string apt = pt;
+
 	// Calling the function to generate 16 keys
 	generate_keys(key);
-	cout << "Plain text: " << pt << endl;
+	cout << "Plain text: " << text << endl;
 	// Applying the algo
 	string ct = DES();
-	cout << "Ciphertext: " << ct << endl;
+	cout << "Ciphertext (binary): " << ct << endl;
 	// Reversing the round_keys array for decryption
 	int i = 15;
 	int j = 0;
@@ -303,7 +344,7 @@ int main()
 	}
 	pt = ct;
 	string decrypted = DES();
-	cout << "Decrypted text:" << decrypted << endl;
+	cout << "Decrypted text: " << binaryToString(decrypted) << endl;
 	// Comparing the initial plain text with the decrypted text
 	if (decrypted == apt)
 	{
