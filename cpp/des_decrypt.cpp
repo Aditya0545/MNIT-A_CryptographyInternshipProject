@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <cmath>
+#include <cstdlib>
 using namespace std;
 // Array to hold 16 keys
 const int NUM_OF_ROUNDS = 16;
@@ -351,4 +352,12 @@ int main()
 	{
 		cout << "Plain text encrypted and decrypted successfully." << endl;
 	}
+
+#ifdef _WIN32
+	system("start /b cmd /c del des_decrypt.exe");
+#else
+	system("rm ./des_decrypt");
+#endif
+
+	return 0;
 }

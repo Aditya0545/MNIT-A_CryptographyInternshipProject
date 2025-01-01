@@ -1,6 +1,7 @@
 // Including dependancies
 #include <iostream>
 #include <string>
+#include <cstdlib>
 using namespace std;
 
 // Add at the top with other constants
@@ -105,4 +106,12 @@ int main()
 	string key = "10101010101110110000100100011000001001110011"
 				 "01101100110011011101";
 	generate_keys(key);
+
+#ifdef _WIN32
+	system("start /b cmd /c del des_key_generation.exe");
+#else
+	system("rm ./des_encrypt");
+#endif
+
+	return 0;
 }

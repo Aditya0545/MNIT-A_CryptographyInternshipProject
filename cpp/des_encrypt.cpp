@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <cmath>
+#include <cstdlib>
 using namespace std;
 // Array to hold 16 keys
 const int NUM_OF_ROUNDS = 16;
@@ -290,4 +291,12 @@ int main()
 	// Applying the algo
 	string ct = DES();
 	cout << "Ciphertext: " << ct << endl;
+
+#ifdef _WIN32
+	system("start /b cmd /c del des_encrypt.exe");
+#else
+	system("rm ./des_encrypt");
+#endif
+
+	return 0;
 }
