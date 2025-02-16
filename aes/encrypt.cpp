@@ -147,9 +147,9 @@ void AESEncrypt(unsigned char *message, unsigned char *expandedKey, unsigned cha
 	}
 }
 
+#ifndef TIMING_ATTACK
 int main()
 {
-
 	cout << "=============================" << endl;
 	cout << " 128-bit AES Encryption Tool   " << endl;
 	cout << "=============================" << endl;
@@ -245,3 +245,4 @@ int main()
 
 	return 0;
 }
+#endif
