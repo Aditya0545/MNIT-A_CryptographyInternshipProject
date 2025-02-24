@@ -3,4 +3,4 @@
 **/*.txt
 **/*.csv
 **/*.png
-!**/requirements.txt
+!**/requirements*.txt
